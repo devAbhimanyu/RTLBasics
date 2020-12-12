@@ -22,7 +22,7 @@ function App() {
 
   return (
     <div className="App">
-      {user && <p>The user is {user?.name}</p>}
+      {user && <p>Username: {user?.name}</p>}
       <CustomInput value={text} onChange={handleChange}>
         Input:
       </CustomInput>

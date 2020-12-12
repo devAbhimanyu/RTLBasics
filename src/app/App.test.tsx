@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen,wait,waitFor } from '@testing-library/react';
+import { render, screen,waitFor } from '@testing-library/react';
 import {getUser} from 'utility';
 import App from './App';
 import {mocked} from 'ts-jest/utils';
@@ -47,7 +47,19 @@ describe('when comp fetches user data successfuly', () => {
 
   test('should call getUser once',async ()=>{
     render(<App />);
-    await waitFor(()=>expect(mockUserData).toHaveBeenCalled());
+    await waitFor(()=>expect(mockUserData).toHaveBeenCalledTimes(1));
   })
+
+  test('should render the username passed',async ()=>{
+    const name ="john doe";
+    mockUserData.mockImplementationOnce(()=>
+      Promise.resolve({id:'1',name})
+    );
+    render(<App />);
+    expect(screen.queryByText(/Username/)).toBeNull();
+    expect(await screen.findByText(/Username/)).toBeInTheDocument();
+    expect(await screen.findByText(`Username: ${name}`)).toBeInTheDocument();
+  })
+
 })
 
