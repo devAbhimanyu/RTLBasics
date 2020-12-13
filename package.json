@@ -20,6 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage":"npm run test -- --coverage --watchAll=false",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -42,5 +43,13 @@
   },
   "devDependencies": {
     "ts-jest": "^26.4.4"
+  },
+  "jest":{
+    "collectCoverageFrom":[
+      "src/**/*.{ts,tsx,js,jsx}",
+      "!src/index.tsx",
+      "!src/reportWebVitals.ts",
+      "!src/**/*.d.ts"
+    ]
   }
 }
