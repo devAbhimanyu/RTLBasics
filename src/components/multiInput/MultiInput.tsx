@@ -1,7 +1,6 @@
 import CustomInput from 'components/customInput/CustomInput';
 import { useState,useEffect } from 'react';
 import { User,getUser } from 'utility';
-import './App.css';
 
 
 
@@ -27,7 +26,10 @@ function App() {
       <CustomInput value={text} onChange={handleChange}>
         Input:
       </CustomInput>
-      <p>Entered text is: {text ? text: '...'}</p>
+      <CustomInput value={text} onChange={handleChange}>
+        Input:
+      </CustomInput>
+      <p>Entered text is: {text ?? '...'}</p>
     </div>
   );
 }

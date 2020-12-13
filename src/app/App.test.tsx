@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen,waitFor } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import {getUser} from 'utility';
 import App from './App';
 import {mocked} from 'ts-jest/utils';
@@ -62,4 +63,19 @@ describe('when comp fetches user data successfuly', () => {
   })
 
 })
+
+describe('when user enters text into input', () => {
+  test('should display text on the screen',async ()=>{
+    render(<App />)
+    await waitFor(()=>expect(mockUserData).toHaveBeenCalled());
+
+    expect(screen.getByText("Entered text is: ...")).toBeInTheDocument()
+
+    const name="John Doe";
+    await userEvent.type(screen.getByRole("textbox"),name);
+
+    expect(screen.getByText(`Entered text is: ${name}`)).toBeInTheDocument()
+  })
+})
+
 
