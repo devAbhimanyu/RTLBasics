@@ -1,24 +1,22 @@
-import CustomInput from 'components/customInput/CustomInput';
-import { useState,useEffect } from 'react';
-import { User,getUser } from 'utility';
-
-
+import CustomInput from "components/customInput/CustomInput";
+import { useState, useEffect } from "react";
+import { User, getUser } from "utility";
 
 function App() {
   const [text, setText] = useState("");
-  const [user, setUser] = useState<null|User>(null)
-  
-  useEffect(()=>{
-    const fetchUserData = async ()=>{
-      const userData= await getUser();
-      setUser(userData);
-    }
-    fetchUserData();
-  },[])
+  const [user, setUser] = useState<null | User>(null);
 
-  const handleChange =(e:React.ChangeEvent<HTMLInputElement>)=>{
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userData = await getUser();
+      setUser(userData);
+    };
+    fetchUserData();
+  }, []);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
-  }
+  };
 
   return (
     <div className="App">
@@ -29,11 +27,9 @@ function App() {
       <CustomInput value={text} onChange={handleChange}>
         Input:
       </CustomInput>
-      <p>Entered text is: {text ?? '...'}</p>
+      <p>Entered text is: {text ?? "..."}</p>
     </div>
   );
 }
-
-
 
 export default App;
